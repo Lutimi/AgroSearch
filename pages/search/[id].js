@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { baseUrl } from '../../service/api'
 import { Alerting } from '../../utils/alert'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function Details({ plant, searchId }) {
   const router = useRouter()
@@ -78,10 +79,9 @@ export default function Details({ plant, searchId }) {
             <div className='flex md:flex-row celular:flex-col-reverse md:justify-between items-center h-72 shadow-lg rounded-xl w-1/2 m-6 celular:p-5 md:p-20'>
               <div>
                 <ul className='text-skyblue'>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
+                   <Link href={`https://www.google.com/search?q=${plant.plantDiseaseName}+%22papa%22`}>
+                     <a>Búsqueda en Google</a>
+                     </Link>
                 </ul>
               </div>
               <div>
