@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import PlantCard from '../../components/PlantCard'
+import Link from 'next/link'
 
 export default function Details({ plant, searchId }) {
   const router = useRouter()
@@ -93,10 +94,9 @@ export default function Details({ plant, searchId }) {
               <div className='flex flex-row gap-4'>
               <div>
                 <ul className='text-skyblue'>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
-                  <li className='hover:underline'>www.ontologiapapa.com</li>
+                   <Link href={`https://www.google.com/search?q=${plant.plantDiseaseName}+%22papa%22`}>
+                     <a>Búsqueda en Google</a>
+                     </Link>
                 </ul>
               </div>
               <div>
