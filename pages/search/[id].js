@@ -1,14 +1,21 @@
 import Navigation from '../../components/navigation'
+import {useState} from 'react'
 import Description from '../../components/description'
 import Footer from '../../components/footer'
 import Image from 'next/image'
 import { baseUrl } from '../../service/api'
 import { Alerting } from '../../utils/alert'
 import { useRouter } from 'next/router'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import PlantCard from '../../components/PlantCard'
 
 export default function Details({ plant, searchId }) {
   const router = useRouter()
   const { id } = router.query
+  const [loop, setLoop] = useState(true)
+
+  console.log("Plant: ", plant)
 
   const saveConcept = async () => {
     const user = JSON.parse(localStorage.getItem('username'))
@@ -49,8 +56,8 @@ export default function Details({ plant, searchId }) {
 
       <Navigation />
 
-      <main className="celular:text-sm md:text-base mx-auto celular:w-full md:w-2/3 min-h-screen">
-        <div className='flex flex-col md:items-start celular:items-center'>
+      <main className="celular:text-sm md:text-base mx-auto mb-4 celular:w-full md:w-2/3 min-h-screen">
+        <div className='flex flex-col md:items-start celular:items-center mb-4'>
           <div className='flex lg:flex-row md:flex-col celular:flex-col my-6 py-8 px-10 justify-between md:shadow-md rounded-lg w-full'>
             <div className="flex md:flex-row flex-1 items-center justify-evenly celular:flex-col celular:items-center md:items-end">
               <h1 className='font-extrabold text-4xl md:py-0 celular:py-4 text-center'>Enfermedades de la papa</h1>
@@ -75,7 +82,18 @@ export default function Details({ plant, searchId }) {
               </div>
             </div>
             {/* plant */}
-            <div className='flex md:flex-row celular:flex-col-reverse md:justify-between items-center h-72 shadow-lg rounded-xl w-1/2 m-6 celular:p-5 md:p-20'>
+            <div className='flex md:flex-col celular:flex-col-reverse md:justify-between items-center h-72 shadow-lg rounded-xl w-1/2 m-2 celular:p-5 md:p-10'>
+              <div className='mb-3'>
+                <p className='font-small flex flex-col'>
+                  <p className='flex items-center gap-2'>
+                    Agente causal: <p className="w-3 h-3 bg-red-300"></p>
+                  </p>
+                  <p className='flex items-center gap-2'>
+                    Sintoma: <p className="w-3 h-3 bg-yellow-300"></p>
+                  </p>
+                </p>
+              </div>
+              <div className='flex flex-row gap-4'>
               <div>
                 <ul className='text-skyblue'>
                   <li className='hover:underline'>www.ontologiapapa.com</li>
@@ -89,8 +107,24 @@ export default function Details({ plant, searchId }) {
                   alt="detail image" width={125} height={162} />
               </div>
             </div>
+            </div>
           </div>
         </div>
+        <Carousel
+          autoPlay
+          infiniteLoop={true}
+          showStatus={false}
+          showIndicators={false}
+          showThumbs={false}
+          interval={3000}
+        >
+          {plant?.agentesCausales?.map((agente, index) => (
+            <PlantCard key={agente.nombre + index} agente={agente} causal setLoop={setLoop} />
+          ))}
+          {plant?.sintomas?.map((agente, index) => (
+            <PlantCard key={agente.nombre + index} agente={agente} setLoop={setLoop} />
+          ))}
+        </Carousel>
       </main>
 
       <Footer />
