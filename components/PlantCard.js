@@ -1,12 +1,12 @@
 import {useState} from 'react'
 
-const PlantCard = ({agente, setLoop, causal = false}) => {
+const PlantCard = ({agente, causal = false}) => {
   const [text, setText] = useState(agente.descripcion.slice(0, 200));
   const [readMore, setReadMore] = useState(false);
   let color = causal ? 'text-red-300' : 'text-yellow-300';
 
   return (
-    <div className='m-auto flex flex-col my-4 md:flex-row md:justify-between items-center min-h-72 shadow-lg rounded-xl w-1/2 m-6 celular:p-5'>
+    <div className='mx-auto flex flex-col my-4 md:flex-row md:justify-between items-center min-h-72 shadow-lg rounded-xl w-1/2 m-6 celular:p-5'>
         <div>
         <div className='flex flex-col'>
             <h1 className={`text-3xl px-10 pt-5 font-medium ${color}`}>{agente.nombre}</h1>
@@ -21,11 +21,9 @@ const PlantCard = ({agente, setLoop, causal = false}) => {
                     if (!readMore) {
                     setText(agente.descripcion);
                     setReadMore(true);
-                    setLoop(false)
                     } else {
                     setText(agente.descripcion.slice(0, 200));
                     setReadMore(false);
-                    setLoop(true)
                     }
                 }}
             >{readMore ? "Mostrar menos" : "Seguir leyendo"}</p>

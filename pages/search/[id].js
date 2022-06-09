@@ -13,9 +13,6 @@ import PlantCard from '../../components/PlantCard'
 export default function Details({ plant, searchId }) {
   const router = useRouter()
   const { id } = router.query
-  const [loop, setLoop] = useState(true)
-
-  console.log("Plant: ", plant)
 
   const saveConcept = async () => {
     const user = JSON.parse(localStorage.getItem('username'))
@@ -112,17 +109,17 @@ export default function Details({ plant, searchId }) {
         </div>
         <Carousel
           autoPlay
-          infiniteLoop={true}
+          infiniteLoop
           showStatus={false}
           showIndicators={false}
           showThumbs={false}
           interval={3000}
         >
           {plant?.agentesCausales?.map((agente, index) => (
-            <PlantCard key={agente.nombre + index} agente={agente} causal setLoop={setLoop} />
+            <PlantCard key={agente.nombre + index} agente={agente} causal />
           ))}
           {plant?.sintomas?.map((agente, index) => (
-            <PlantCard key={agente.nombre + index} agente={agente} setLoop={setLoop} />
+            <PlantCard key={agente.nombre + index} agente={agente}  />
           ))}
         </Carousel>
       </main>
