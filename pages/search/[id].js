@@ -79,8 +79,8 @@ export default function Details({ plant, searchId }) {
 
       <main className="celular:text-sm md:text-base mx-auto mb-4 celular:w-full md:w-2/3 min-h-screen">
         <div className="flex flex-col md:items-start celular:items-center mb-4">
-          <div className="flex lg:flex-row md:flex-col celular:flex-col my-6 py-8 px-10 justify-between md:shadow-md rounded-lg w-full">
-            <div className="flex md:flex-row flex-1 items-center justify-evenly celular:flex-col celular:items-center md:items-end">
+          <div className="flex lg:flex-row items-center md:flex-col celular:flex-col my-6 py-8 px-10 justify-between md:shadow-md rounded-lg w-full">
+            <div className="flex md:flex-col flex-1  gap-[16px] justify-evenly celular:flex-col celular:items-center md:items-start">
               <h1 className="font-extrabold text-4xl md:py-0 celular:py-4 text-center">
                 Enfermedades de la papa
               </h1>
@@ -142,12 +142,12 @@ export default function Details({ plant, searchId }) {
           </div>
         </div>
 
-        <div className="mb-3 m-auto w-fit mb-[50px]">
+        <div className="mb-3 m-auto w-fit mb-[30px]">
           <p className="font-small flex gap-[100px]">
-            <p className="flex items-center gap-[50px]">
+            <p className="flex items-center gap-[20px]">
               Agente causal: <p className="w-3 h-3 bg-red-300"></p>
             </p>
-            <p className="flex items-center gap-[50px]">
+            <p className="flex items-center gap-[20px]">
               Sintoma: <p className="w-3 h-3 bg-yellow-300"></p>
             </p>
           </p>

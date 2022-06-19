@@ -9,7 +9,10 @@ html{
 
 .swiper {
   width: 100%;
-  height: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
 }
 
 .swiper-slide {
@@ -30,6 +33,20 @@ html{
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+}
+
+.swiper-button-next {
+  right: -3px !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: #505050;
+  font-size: 30px !important;
+}
+
+.swiper-button-prev {
+  left: -3px !important;
 }
 
 .swiper-slide img {
@@ -92,5 +109,37 @@ html{
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+
+.full-loader {
+  height: 100vh;
+  width: 100wv;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #505050;
+  border-color: #505050 transparent #505050 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
