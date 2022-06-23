@@ -47,7 +47,7 @@ export default function Index({ categories, plants, plantCategories }) {
       btnSearchRef.current.click()
     }
   }
-  
+
   return (
     <div>
 
@@ -57,13 +57,13 @@ export default function Index({ categories, plants, plantCategories }) {
 
       <main className=' celular:text-sm celular:w-full md:text-base md:w-2/3 md:mx-auto min-h-screen'>
         <div className='flex justify-center mb-8 mt-12'>
-          <Image width={320} height={59} src="/Frame.png" alt="home image" />
+          <Image width={422} height={200} src="/Frame.svg" alt="home image" />
         </div>
 
-        <div className='flex md:flex-row relative justify-center'>
+        <div className='flex md:flex-row relative justify-center '>
           <div className='relative celular:w-full celular:mx-8 md:w-3/5 z-[1]' >
-            <input className="w-full rounded-md px-3 border border-black h-10 " type="text" placeholder='Ingrese su búsqueda..' onChange={(e) => handleInputChange(e.target.value)} onKeyDown={handleEnter}></input>
-            <div className='pointer-events-none z-[2] absolute text-black md:inset-y-2 celular:inset-y-2.5 celular:right-0 celular: px-3 md:right-3 '>
+            <input className="w-full rounded-md px-3 border border-gray-400 h-10 " type="text" placeholder='Ingrese su búsqueda..' onChange={(e) => handleInputChange(e.target.value)} onKeyDown={handleEnter}></input>
+            <div className='pointer-events-none z-[2] absolute text-gray-500 md:inset-y-2 celular:inset-y-2.5 celular:right-0 celular: px-3 md:right-3 '>
               <a><FontAwesomeIcon icon={faSearch} size="1x" /></a>
             </div>
           </div>
@@ -71,12 +71,12 @@ export default function Index({ categories, plants, plantCategories }) {
 
         <div className='flex md:flex-row justify-center md:py-6 2xl:space-x-10 celular:flex-col items-center celular:space-x-0 py-6 md:space-x-10'>
           <Link passHref href="/search">
-            <button href="replace" ref={btnSearchRef} className="celular:my-1 celular:w-80 rounded-xl hover:bg-bluebuscarhover md:w-48 h-9 bg-bluebuscar text-white celular:text-lg md:text-base">
+            <button href="replace" ref={btnSearchRef} className="celular:my-1 celular:w-80 rounded-xl hover:bg-bluebuscarhover md:w-48 h-10 bg-bluebuscar text-white celular:text-lg md:text-base">
               Buscar
             </button>
           </Link>
           <Link passHref href="/assistedsearch">
-            <button href="replace" className=" celular:my-1 celular:w-80 rounded-xl hover:bg-bluepotatohover md:w-48 h-9 bg-bluepotato text-white celular:text-lg md:text-base">
+            <button href="replace" className=" celular:my-1 celular:w-80 rounded-xl hover:bg-bluepotatohover md:w-48 h-10 bg-bluepotato text-white celular:text-lg md:text-base">
               Ayuda en la búsqueda
             </button>
           </Link>

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from "react";
 
-export default function AssistedSearch({plagueSymptoms, diseaseSymptoms}) {
+export default function AssistedSearch({ plagueSymptoms, diseaseSymptoms }) {
 
   const tree = new BinarySeachTree()
 
@@ -26,7 +26,7 @@ export default function AssistedSearch({plagueSymptoms, diseaseSymptoms}) {
   const [isFound, setIsFound] = useState(false)
 
   function createBinarySeachTree(list) {
-    for(var i=0; i < list.length;i++)
+    for (var i = 0; i < list.length; i++)
       tree.insert(list[i])
   }
 
@@ -47,15 +47,15 @@ export default function AssistedSearch({plagueSymptoms, diseaseSymptoms}) {
   }
 
   const answerYes = () => {
-    if(currentSymptom.left != null || currentSymptom.right != null) { //si no hay sintoma en izq y der
-      if(currentSymptom.left != null) { //si hay sintoma en izq
+    if (currentSymptom.left != null || currentSymptom.right != null) { //si no hay sintoma en izq y der
+      if (currentSymptom.left != null) { //si hay sintoma en izq
         setSymptom(currentSymptom.left.value.sintomaComentario.toLowerCase())
         setCurrentSymptom(currentSymptom.left)
       } else {
-      setInfection(currentInfection.value.infeccionNombre)
-      setInfectionId(currentInfection.value.infeccionId)
-      setShowResult(true)
-      setIsFound(true)
+        setInfection(currentInfection.value.infeccionNombre)
+        setInfectionId(currentInfection.value.infeccionId)
+        setShowResult(true)
+        setIsFound(true)
       }
     } else {
       setInfection(currentInfection.value.infeccionNombre)
@@ -66,8 +66,8 @@ export default function AssistedSearch({plagueSymptoms, diseaseSymptoms}) {
   }
 
   const answerNo = () => {
-    if(currentInfection.right != null) {
-      if(currentSymptom.right != null) {
+    if (currentInfection.right != null) {
+      if (currentSymptom.right != null) {
         setSymptom(currentSymptom.right.value.sintomaComentario.toLowerCase())
       } else {
         setSymptom(currentInfection.right.value.sintomaComentario.toLowerCase())
@@ -90,19 +90,19 @@ export default function AssistedSearch({plagueSymptoms, diseaseSymptoms}) {
           <div className='celular:pt-10 celular:py-5 md:py-10 celular:pl-10'>
             <h1 className='font-bold celular:text-4xl md:text-5xl '>Búsqueda guiada</h1>
           </div>
-          <div className='flex md:flex-row celular:flex-col md:pt-6 justify-center'>
-            <div className='flex md:flex-row celular:flex-col md:ml-10 items-center'>
-              <Image layout='intrinsic' width={350} height={350} src='/pensando.png' alt='assistedImage' />
+          <div className='flex md:grid grid-cols-3 celular:flex-col md:pt-6 justify-center'>
+            <div className='flex md:flex-row celular:mx-4 col-span-2 celular:flex-col md:ml-10 items-center'>
+              <Image layout='intrinsic' width={350} height={350} objectFit='cover' src='/pensando.png' alt='assistedImage' />
               {showResult || <div className='flex flex-col justify-center shadow-lg border rounded-lg md:ml-2 celular:mx-2 md:mr-20 p-12 h-52 w-80'>
                 <div className='py-2'>
                   {flag || <p className='flex w-56 font-semibold text-center'>¿El cultivo de papa está siendo afectado por una plaga?</p>}
                   {flag && <p className='flex w-56 font-semibold text-center'>¿El cultivo de papa presenta {symptom}?</p>}
                 </div>
                 <div className='flex flex-row justify-center space-x-4 text-sm py-2'>
-                  {flag || <button onClick= {choosePlage} className='rounded-md w-24 h-7 bg-skyblue text-white'>Sí</button>}
-                  {flag || <button onClick= {chooseDisease} className='rounded-md w-24 h-7 bg-bluebuscar text-white'>No</button>}
-                  {flag && <button onClick= {answerYes} className='rounded-md w-24 h-7 bg-skyblue text-white'>Sí</button>}
-                  {flag && <button onClick= {answerNo} className='rounded-md w-24 h-7 bg-bluebuscar text-white'>No</button>}
+                  {flag || <button onClick={choosePlage} className='rounded-md w-24 h-7 bg-skyblue text-white'>Sí</button>}
+                  {flag || <button onClick={chooseDisease} className='rounded-md w-24 h-7 bg-bluebuscar text-white'>No</button>}
+                  {flag && <button onClick={answerYes} className='rounded-md w-24 h-7 bg-skyblue text-white'>Sí</button>}
+                  {flag && <button onClick={answerNo} className='rounded-md w-24 h-7 bg-bluebuscar text-white'>No</button>}
                 </div>
               </div>}
               {showResult && <div className='flex flex-col justify-center shadow-lg border rounded-lg md:ml-2 celular:mx-2 md:mr-20 p-12 h-52 w-80'>
@@ -118,16 +118,10 @@ export default function AssistedSearch({plagueSymptoms, diseaseSymptoms}) {
                 </div>}
               </div>}
             </div>
-            <div className='flex flex-col celular:mx-12 celular:py-4 md:mx-20 md:py-10'>
-              <h1 className='font-bold text-3xl py-6'>
-                Enlaces relacionados
-              </h1>
-              <ul className='text-skyblue list-disc px-8'>
-                <li className='py-1 hover:underline'>www.ontologiapapa.com</li>
-                <li className='py-1 hover:underline'>www.ontologiapapa.com</li>
-                <li className='py-1 hover:underline'>www.ontologiapapa.com</li>
-                <li className='py-1 hover:underline'>www.ontologiapapa.com</li>
-              </ul>
+            <div className='flex flex-col celular:mx-12 celular:py-12 md:mx-4 md:py-10'>
+              <div className='flex justify-center mb-8 mt-12'>
+                <Image width={422} height={300} objectFit="cover" src="/cultivating.svg" alt="agricultor image" />
+              </div>
             </div>
           </div>
         </div>
@@ -138,14 +132,14 @@ export default function AssistedSearch({plagueSymptoms, diseaseSymptoms}) {
   )
 }
 
-async function getDataDisease(){
+async function getDataDisease() {
   const data = await fetch("http://search-ontologia.azurewebsites.net/search/guided/enfermedad")
   const jsondata = await data.json()
 
   return jsondata
 }
 
-async function getDataPlague(){
+async function getDataPlague() {
   const data = await fetch("http://search-ontologia.azurewebsites.net/search/guided/plaga")
   const jsondata = await data.json()
 
@@ -153,8 +147,8 @@ async function getDataPlague(){
 }
 
 export async function getStaticProps() {
-  const dataPlague= await getDataPlague()
-  const dataDisease= await getDataDisease()
+  const dataPlague = await getDataPlague()
+  const dataDisease = await getDataDisease()
 
   return {
     props: {
@@ -165,14 +159,14 @@ export async function getStaticProps() {
 }
 
 class ThreeNode {
-  constructor(value){
+  constructor(value) {
     this.value = value;
     this.left = null;
     this.right = null;
   }
 }
 class BinarySeachTree {
-  constructor(){
+  constructor() {
     this.root = null;
   }
   insert(value) {

@@ -13,8 +13,8 @@ const PlantCard = ({ agente, causal = false }) => {
   let color = causal ? "text-red-300" : "text-yellow-300";
 
   return (
-    <div className="shadow-lg flex rounded min-h-[270px] max-w-[280px]">
-      <div className="flex-1 flex flex-col justify-between p-[14px] text-justify space=y-4">
+    <div className="shadow-lg flex rounded-xl min-h-[270px] max-w-[280px]">
+      <div className="flex-1 flex flex-col  rounded-xl justify-between p-[14px] text-justify space-y-4">
         <h1
           className={`text-[22px] truncate text-ellipsis overflow-hidden font-medium ${color} px-[14px]`}
         >

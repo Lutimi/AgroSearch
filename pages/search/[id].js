@@ -79,9 +79,9 @@ export default function Details({ plant, searchId }) {
 
       <main className="celular:text-sm md:text-base mx-auto mb-4 celular:w-full md:w-2/3 min-h-screen">
         <div className="flex flex-col md:items-start celular:items-center mb-4">
-          <div className="flex lg:flex-row items-center md:flex-col celular:flex-col my-6 py-8 px-10 justify-between md:shadow-md rounded-lg w-full">
-            <div className="flex md:flex-col flex-1  gap-[16px] justify-evenly celular:flex-col celular:items-center md:items-start">
-              <h1 className="font-extrabold text-4xl md:py-0 celular:py-4 text-center">
+          <div className="flex lg:flex-row   lg:items-center md:flex-col celular:flex-col my-6 py-8 px-10 justify-between md:shadow-md rounded-lg w-full">
+            <div className="flex md:flex-col flex-1   gap-[16px] justify-between celular:flex-col celular:items-center  md:items-start">
+              <h1 className="font-medium text-4xl md:py-0 celular:py-4 text-justify lg:text-center">
                 Enfermedades de la papa
               </h1>
               <button
@@ -91,8 +91,8 @@ export default function Details({ plant, searchId }) {
                 Guardar detalle
               </button>
             </div>
-            <div className="flex flex-col md:py-0 celular:py-10 md:w-[250px]">
-              <div className="flex justify-center">
+            <div className="flex flex-col justify-between items-start md:py-0 space-y-4 celular:py-10 md:w-[250px]">
+              <div className="flex  justify-start items-start md:justify-center ">
                 <p className="text-lg font-medium">
                   ¿Te fue útil esta búsqueda?
                 </p>
@@ -108,34 +108,70 @@ export default function Details({ plant, searchId }) {
             </div>
           </div>
 
-          <div className="flex md:flex-row md:w-full md:justify-between celular:flex-col items-center">
+          <div className="flex md:flex-row w-full space-x-12 justify-between celular:flex-col items-center">
             <div className="flex flex-col md:w-1/2">
-              <h1 className="text-3xl px-10 pt-5 font-medium">
+              <h1 className="text-3xl  pt-5 font-medium">
                 {plant.plantDiseaseName}
               </h1>
-              <div className=" px-10 py-5 ">
+              <div className="  py-5  text-gray-700 ">
                 <p>{plant.plantDiseaseDescription}</p>
               </div>
             </div>
-            {/* plant */}
-            <div className="flex justify-center md:flex-col celular:flex-col-reverse md:justify-between items-center h-72 shadow-lg rounded-xl w-1/2 m-2 celular:p-5 md:p-10">
-              <div className="flex flex-row gap-4">
-                <div className="flex items-center">
-                  <ul className="text-skyblue">
-                    <Link
-                      href={`https://www.google.com/search?q=${plant.plantDiseaseName}+%22papa%22`}
-                    >
-                      <a>Búsqueda en Google</a>
-                    </Link>
-                  </ul>
+
+            <div className="grid celular:grid-col-1 gap-12 grid-cols-2 w-full ">
+
+
+
+
+
+              {/* Plant */}
+              <div className="flex justify-center md:flex-col celular:flex-col-reverse md:justify-between items-center h-5/6 shadow-lg rounded-xl w-full m-2 celular:p-5 md:p-10">
+                <div className="flex flex-row gap-4">
+                  <div className="flex items-center">
+                    <ul className="text-skyblue">
+                      <Link
+                        href={`https://www.google.com/search?q=${plant.plantDiseaseName}+%22papa%22`}
+                      >
+                        <a>Búsqueda en Google</a>
+                      </Link>
+                    </ul>
+                  </div>
+                  <div>
+                    <Image
+                      src="https://blush.design/api/download?shareUri=_nRDPd5Vo&w=800&h=800&fm=png"
+                      alt="detail image"
+                      width={125}
+                      height={162}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <Image
-                    src="https://blush.design/api/download?shareUri=_nRDPd5Vo&w=800&h=800&fm=png"
-                    alt="detail image"
-                    width={125}
-                    height={162}
-                  />
+              </div>
+
+              {/* plant */}
+              <div className="flex  justify-center md:flex-col celular:flex-col-reverse
+               md:justify-between items-center h-5/6 shadow-lg rounded-xl w-full m-2 celular:p-5 md:p-10">
+                <div className="flex flex-col space-y-2">
+                  <div className="flex justify-center text-center">
+                    <ul className="text-gray-700 font-medium">
+                      <Link
+                        href={`https://www.google.com/search?q=${plant.plantDiseaseName}+%22papa%22`}
+                      >
+                        <a>Búsqueda en Google
+                          <Image
+                            src="/google.svg"
+                            alt="detail image"
+                            width={200}
+                            height={200}
+                            objectFit="contain"
+                          />
+                        </a>
+                      </Link>
+                    </ul>
+                  </div>
+                  <div className="flex justify-center">
+
+
+                  </div>
                 </div>
               </div>
             </div>

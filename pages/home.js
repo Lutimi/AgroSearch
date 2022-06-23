@@ -32,9 +32,9 @@ export default function Home() {
 
             <Navigation />
 
-            <main className='mx-auto w-2/3 min-h-screen'>
+            <main className='mx-auto w-full min-h-screen'>
                 <div className='flex justify-center mb-8 mt-12'>
-                    <Image width={320} height={59} src="/Frame.png" alt="home image" />
+                    <Image width={449} height={124} src="/Frame.png" alt="home image" />
                 </div>
 
                 <div className='flex flex-row relative justify-center'>
