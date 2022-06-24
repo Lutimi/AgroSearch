@@ -1,97 +1,128 @@
-import Description from '../components/description'
-import Image from 'next/image'
-import Link from "next/link"
-import Navigation from '../components/navigation'
-import Footer from '../components/footer'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
-import { useSession } from 'next-auth/react'
-import { baseUrl } from '../service/api'
-import { useStore } from '../store'
+import Description from "../components/description";
+import Image from "next/image";
+import Link from "next/link";
+import Navigation from "../components/navigation";
+import Footer from "../components/footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { baseUrl } from "../service/api";
+import { useStore } from "../store";
 
 export default function Index({ categories, plants, plantCategories }) {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
-  const state = useStore(state => state)
-
-  const btnSearchRef = useRef(null)
+  const state = useStore((state) => state);
+  const btnSearchRef = useRef(null);
 
   const handleInputChange = (newInputValue) => {
-    console.log(newInputValue)
-    console.log(state)
-    state.setSearchInput(newInputValue)
-  }
+    console.log(newInputValue);
+    console.log(state);
+    state.setSearchInput(newInputValue);
+  };
 
   useEffect(() => {
     (async () => {
-      if (!session) return
-      const listUser = await baseUrl.get('/users')
-      const existUser = listUser.data.find(user => user.email === session.user?.email)
-      localStorage.setItem('username', JSON.stringify(existUser))
-      if (existUser) return
-      const registerUser = await baseUrl.post('/users', {
+      if (!session) return;
+      const listUser = await baseUrl.get("/users");
+      const existUser = listUser.data.find(
+        (user) => user.email === session.user?.email
+      );
+      localStorage.setItem("username", JSON.stringify(existUser));
+      if (existUser) return;
+      const registerUser = await baseUrl.post("/users", {
         email: session.user.email,
         name: session.user.name,
         lastName: session.user.name,
-      })
+      });
       if (registerUser.status === 200) {
-        localStorage.setItem('username', JSON.stringify(registerUser.data))
+        localStorage.setItem("username", JSON.stringify(registerUser.data));
       }
-    })()
-  }, [session])
+    })();
+  }, [session]);
 
   const handleEnter = (e) => {
-    if (e.key === 'Enter') {
-      btnSearchRef.current.click()
+    if (e.key === "Enter") {
+      btnSearchRef.current.click();
     }
-  }
+  };
 
   return (
     <div>
-
       <Description />
 
       <Navigation />
 
-      <main className=' celular:text-sm celular:w-full md:text-base md:w-2/3 md:mx-auto min-h-screen'>
-        <div className='flex justify-center mb-8 mt-12'>
+      <main className=" celular:text-sm celular:w-full md:text-base md:w-2/3 md:mx-auto min-h-screen">
+        <div className="flex justify-center mb-8 mt-12">
           <Image width={422} height={200} src="/Frame.svg" alt="home image" />
         </div>
 
-        <div className='flex md:flex-row relative justify-center '>
-          <div className='relative celular:w-full celular:mx-8 md:w-3/5 z-[1]' >
-            <input className="w-full rounded-md px-3 border border-gray-400 h-10 " type="text" placeholder='Ingrese su búsqueda..' onChange={(e) => handleInputChange(e.target.value)} onKeyDown={handleEnter}></input>
-            <div className='pointer-events-none z-[2] absolute text-gray-500 md:inset-y-2 celular:inset-y-2.5 celular:right-0 celular: px-3 md:right-3 '>
-              <a><FontAwesomeIcon icon={faSearch} size="1x" /></a>
+        <div className="flex md:flex-row relative justify-center ">
+          <div className="relative celular:w-full celular:mx-8 md:w-3/5 z-[1]">
+            <input
+              className="w-full rounded-md px-3 border border-gray-400 h-10 "
+              type="text"
+              placeholder="Ingrese su búsqueda.."
+              onChange={(e) => handleInputChange(e.target.value)}
+              onKeyDown={handleEnter}
+            ></input>
+            <div className="pointer-events-none z-[2] absolute text-gray-500 md:inset-y-2 celular:inset-y-2.5 celular:right-0 celular: px-3 md:right-3 ">
+              <a>
+                <FontAwesomeIcon icon={faSearch} size="1x" />
+              </a>
             </div>
           </div>
         </div>
 
-        <div className='flex md:flex-row justify-center md:py-6 2xl:space-x-10 celular:flex-col items-center celular:space-x-0 py-6 md:space-x-10'>
+        <div className="flex md:flex-row justify-center md:py-6 2xl:space-x-10 celular:flex-col items-center celular:space-x-0 py-6 md:space-x-10">
           <Link passHref href="/search">
-            <button href="replace" ref={btnSearchRef} className="celular:my-1 celular:w-80 rounded-xl hover:bg-bluebuscarhover md:w-48 h-10 bg-bluebuscar text-white celular:text-lg md:text-base">
+            <button
+              href="replace"
+              ref={btnSearchRef}
+              className="celular:my-1 celular:w-80 rounded-xl hover:bg-bluebuscarhover md:w-48 h-10 bg-bluebuscar text-white celular:text-lg md:text-base"
+            >
               Buscar
             </button>
           </Link>
           <Link passHref href="/assistedsearch">
-            <button href="replace" className=" celular:my-1 celular:w-80 rounded-xl hover:bg-bluepotatohover md:w-48 h-10 bg-bluepotato text-white celular:text-lg md:text-base">
+            <button
+              href="replace"
+              className=" celular:my-1 celular:w-80 rounded-xl hover:bg-bluepotatohover md:w-48 h-10 bg-bluepotato text-white celular:text-lg md:text-base"
+            >
               Ayuda en la búsqueda
             </button>
           </Link>
         </div>
 
-        <div className='flex celular:flex-col celular:mx-8 md:flex-row celular:items-center md:items-start justify-around py-4 celular:text-lg md:text-base '>
-          {categories.map(categorie => (
-            <div key={categorie.id} className='flex flex-col celular:w-full md:w-64'>
-              <p className='celular:text-center md:text-left font-medium'> {categorie.categoryDiseaseName}</p>
-              {plantCategories.map(plantCategorie => (
-                <div key={plantCategorie.id} className='flex flex-row shadow-md shadow-gray-400 rounded-lg py-5 px-10 my-3 celular:w-full md:w-64 h-22 celular:justify-center z-[-50]'>
-                  <Image src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cG90YXRvfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                    alt="avatar" width={55} height={42} className="rounded" />
+        <div className="flex celular:flex-col celular:mx-8 md:flex-row celular:items-center md:items-start justify-around py-4 celular:text-lg md:text-base ">
+          {categories.map((categorie) => (
+            <div
+              key={categorie.id}
+              className="flex flex-col celular:w-full md:w-64"
+            >
+              <p className="celular:text-center md:text-left font-medium">
+                {" "}
+                {categorie.categoryDiseaseName}
+              </p>
+              {plantCategories.map((plantCategorie) => (
+                <div
+                  key={plantCategorie.id}
+                  className="flex flex-row shadow-md shadow-gray-400 rounded-lg py-5 px-10 my-3 celular:w-full md:w-64 h-22 celular:justify-center z-[-50]"
+                >
+                  <Image
+                    src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cG90YXRvfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+                    alt="avatar"
+                    width={55}
+                    height={42}
+                    className="rounded"
+                  />
                   <div className="flex items-center px-6">
-                    <p className='celular:text-lg md:text-sm '>{plantCategorie.plantDiseaseName}</p>
+                    <p className="celular:text-lg md:text-sm ">
+                      {plantCategorie.plantDiseaseName}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -115,12 +146,11 @@ export default function Index({ categories, plants, plantCategories }) {
         <table className='justify-center w-full'
           categorie={plantCategories}
           col_labels={['Categoría', 'Planta']} />*/}
-
       </main>
 
       <Footer />
-    </div >
-  )
+    </div>
+  );
 }
 
 /*
@@ -140,17 +170,19 @@ useEffect(() => {
 */
 
 export const getStaticProps = async (context) => {
-
-  const cat = await fetch('https://backend-ontologia.azurewebsites.net/api/categorydiseases')
+  const cat = await fetch(
+    "https://backend-ontologia.azurewebsites.net/api/categorydiseases"
+  );
   const data = await cat.json();
 
-  const plat = await fetch('https://backend-ontologia.azurewebsites.net/api/plantdiseases/');
+  const plat = await fetch(
+    "https://backend-ontologia.azurewebsites.net/api/plantdiseases/"
+  );
   const data2 = await plat.json();
 
   //const categoryId = data.map(function (item) {
   //  return item.id;
   //});
-
 
   //var plantCategories = [];
   //var mergerdCat = [];
@@ -189,8 +221,8 @@ export const getStaticProps = async (context) => {
     props: {
       categories: data,
       //plants: data2,
-      plantCategories: data2
+      plantCategories: data2,
       //plantCategoryId: plantCategoryId
     },
-  }
-}
+  };
+};

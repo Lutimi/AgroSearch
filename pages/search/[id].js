@@ -10,6 +10,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import PlantCard from "../../components/PlantCard";
 import Link from "next/link";
 
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
@@ -71,6 +74,7 @@ export default function Details({ plant, searchId }) {
       });
     }
   };
+  const percentage = 78.6;
   return (
     <div>
       <Description />
@@ -108,24 +112,60 @@ export default function Details({ plant, searchId }) {
             </div>
           </div>
 
-          <div className="flex md:flex-row w-full space-x-12 justify-between celular:flex-col items-center">
-            <div className="flex flex-col md:w-1/2">
-              <h1 className="text-3xl  pt-5 font-medium">
+          <div className="grid md:grid-cols-2 celular:grid-cols-1 w-full space-x-12 celular:px-4">
+            <div className="flex flex-col">
+              <h1 className="text-3xl  pt-5 font-medium text-[#13293D]">
                 {plant.plantDiseaseName}
               </h1>
               <div className="  py-5  text-gray-700 ">
-                <p>{plant.plantDiseaseDescription}</p>
+                <p className="text-gray-700">{plant.plantDiseaseDescription}</p>
               </div>
             </div>
 
-            <div className="grid celular:grid-col-1 gap-12 grid-cols-2 w-full ">
-
-
-
-
-
+            <div
+              className="flex w-full m-0 celular:flex-col md:flex-row"
+              style={{ margin: 0 }}
+            >
               {/* Plant */}
-              <div className="flex justify-center md:flex-col celular:flex-col-reverse md:justify-between items-center h-5/6 shadow-lg rounded-xl w-full m-2 celular:p-5 md:p-10">
+              {plant.afectaA && (
+                <div
+                  className="flex justify-center md:flex-col celular:flex-col-reverse
+               md:justify-between items-center h-5/6 shadow-lg rounded-xl w-full m-2 celular:p-5 md:p-10"
+                >
+                  <h2 className="text-gray-500 text-[16px] font-semibold text-center mb-2">
+                    Afecta a un porcentaje de los cultivos
+                  </h2>
+                  <CircularProgressbar
+                    styles={{
+                      path: {
+                        // Path color
+                        stroke: `#FD9808`,
+                        // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                        strokeLinecap: "round",
+                        // Customize transition animation
+                        // Rotate the path
+                      },
+                      text: {
+                        fill: "#FD9808",
+                        fontSize: "24px",
+                        fontWeight: "bold",
+                      },
+                      trail: {
+                        // Trail color
+                        stroke: "#E8F1F2",
+                        // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                        strokeLinecap: "butt",
+                        // Rotate the trail
+                        transform: "rotate(0.25turn)",
+                        transformOrigin: "center center",
+                      },
+                    }}
+                    value={plant.afectaA}
+                    text={`${plant.afectaA}%`}
+                  />
+                </div>
+              )}
+              {/* <div className="flex justify-center md:flex-col celular:flex-col-reverse md:justify-between items-center h-5/6 shadow-lg rounded-xl w-full m-2 celular:p-5 md:p-10">
                 <div className="flex flex-row gap-4">
                   <div className="flex items-center">
                     <ul className="text-skyblue">
@@ -145,18 +185,20 @@ export default function Details({ plant, searchId }) {
                     />
                   </div>
                 </div>
-              </div>
-
+              </div> */}
               {/* plant */}
-              <div className="flex  justify-center md:flex-col celular:flex-col-reverse
-               md:justify-between items-center h-5/6 shadow-lg rounded-xl w-full m-2 celular:p-5 md:p-10">
+              <div
+                className="flex  justify-center md:flex-col celular:flex-col-reverse
+               md:justify-between items-center h-5/6 shadow-lg rounded-xl w-full m-2 celular:p-5 md:p-10"
+              >
                 <div className="flex flex-col space-y-2">
                   <div className="flex justify-center text-center">
                     <ul className="text-gray-700 font-medium">
                       <Link
                         href={`https://www.google.com/search?q=${plant.plantDiseaseName}+%22papa%22`}
                       >
-                        <a>Búsqueda en Google
+                        <a className="flex items-center flex-col justify-center">
+                          Búsqueda en Google
                           <Image
                             src="/google.svg"
                             alt="detail image"
@@ -168,10 +210,7 @@ export default function Details({ plant, searchId }) {
                       </Link>
                     </ul>
                   </div>
-                  <div className="flex justify-center">
-
-
-                  </div>
+                  <div className="flex justify-center"></div>
                 </div>
               </div>
             </div>
@@ -193,7 +232,7 @@ export default function Details({ plant, searchId }) {
           slidesPerView={windowWidth < 1200 ? 1 : 3}
           spaceBetween={1}
           slidesPerGroup={windowWidth < 1200 ? 1 : 3}
-          loop={windowWidth < 1200 ? false : true}
+          loop={false}
           loopFillGroupWithBlank={false}
           navigation={true}
           modules={[Navi]}

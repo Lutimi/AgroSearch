@@ -14,14 +14,14 @@ const PlantCard = ({ agente, causal = false }) => {
 
   return (
     <div className="shadow-lg flex rounded-xl min-h-[270px] max-w-[280px]">
-      <div className="flex-1 flex flex-col  rounded-xl justify-between p-[14px] text-justify space-y-4">
+      <div className="flex-1 flex flex-col w-full rounded-xl justify-between p-[14px] text-justify space-y-4">
         <h1
           className={`text-[22px] truncate text-ellipsis overflow-hidden font-medium ${color} px-[14px]`}
         >
           {agente.nombre}
         </h1>
 
-        <p className="text-[16px] p-[16px]">
+        <p className="text-[16px] p-[16px] text-gray-700">
           {text}
           {isOpen && !readMore && "..."}
         </p>
